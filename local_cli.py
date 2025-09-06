@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from pawnlib.cli import main_cli
+from pawnstack.cli.main import main
 
-main_cli.main()
+main()
 # main_cli_with_required.main()

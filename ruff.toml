@@ -1,0 +1,288 @@
+# Ruff configuration for PawnStack project
+# Based on .kiro specifications and coding standards
+
+[tool.ruff]
+# Python version target
+target-version = "py38"
+
+# Line length (based on project standards)
+line-length = 120
+
+# Indentation width
+indent-width = 4
+
+# Files to include
+include = ["*.py", "*.pyi", "**/pyproject.toml"]
+
+# Files and directories to exclude
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+    "legacy/pawnlib/migrations",
+    "legacy/pawnlib/deprecated",
+    "docs/_build",
+    "htmlcov",
+]
+
+# Assume Python 3.8+ for all code
+preview = true
+respect-gitignore = true
+
+[tool.ruff.lint]
+# Enable comprehensive rule sets aligned with project standards
+select = [
+    "E",      # pycodestyle errors
+    "F",      # pyflakes
+    "W",      # pycodestyle warnings
+    "C90",    # mccabe complexity
+    "I",      # isort
+    "N",      # pep8-naming
+    "UP",     # pyupgrade
+    "YTT",    # flake8-2020
+    "ASYNC",  # flake8-async
+    "S",      # flake8-bandit (security)
+    "BLE",    # flake8-blind-except
+    "FBT",    # flake8-boolean-trap
+    "B",      # flake8-bugbear
+    "A",      # flake8-builtins
+    "COM",    # flake8-commas
+    "C4",     # flake8-comprehensions
+    "DTZ",    # flake8-datetimez
+    "T10",    # flake8-debugger
+    "DJ",     # flake8-django
+    "EM",     # flake8-errmsg
+    "EXE",    # flake8-executable
+    "FA",     # flake8-future-annotations
+    "ISC",    # flake8-implicit-str-concat
+    "ICN",    # flake8-import-conventions
+    "G",      # flake8-logging-format
+    "INP",    # flake8-no-pep420
+    "PIE",    # flake8-pie
+    "T20",    # flake8-print
+    "PYI",    # flake8-pyi
+    "PT",     # flake8-pytest-style
+    "Q",      # flake8-quotes
+    "RSE",    # flake8-raise
+    "RET",    # flake8-return
+    "SLF",    # flake8-self
+    "SLOT",   # flake8-slots
+    "SIM",    # flake8-simplify
+    "TID",    # flake8-tidy-imports
+    "TCH",    # flake8-type-checking
+    "INT",    # flake8-gettext
+    "ARG",    # flake8-unused-arguments
+    "PTH",    # flake8-use-pathlib
+    "TD",     # flake8-todos
+    "FIX",    # flake8-fixme
+    "ERA",    # eradicate (commented code)
+    "PD",     # pandas-vet
+    "PGH",    # pygrep-hooks
+    "PL",     # pylint
+    "TRY",    # tryceratops
+    "FLY",    # flynt
+    "NPY",    # NumPy-specific rules
+    "AIR",    # Airflow
+    "PERF",   # Perflint (performance)
+    "FURB",   # refurb
+    "LOG",    # flake8-logging
+    "RUF",    # Ruff-specific rules
+]
+
+# Ignore specific rules that conflict with project patterns
+ignore = [
+    "E501",    # Line too long (handled by formatter)
+    "E402",    # Module level import not at top of file
+    "F401",    # Unused imports (handled separately)
+    "F403",    # Star imports (sometimes needed for __init__.py)
+    "S101",    # Use of assert (needed for tests)
+    "S105",    # Possible hardcoded password (false positives)
+    "S106",    # Possible hardcoded password (false positives)
+    "T20",     # Print statements (needed for CLI tools)
+    "PLR0913", # Too many arguments (some functions need many args)
+    "PLR2004", # Magic value comparison (sometimes needed)
+    "TRY003",  # Long exception messages (Korean/English messages are long)
+    "EM101",   # Exception message in f-string (convenient)
+    "EM102",   # Exception message in f-string (convenient)
+    "FBT001",  # Boolean positional arg (sometimes needed)
+    "FBT002",  # Boolean default arg (sometimes needed)
+    "COM812",  # Missing trailing comma (handled by formatter)
+    "ISC001",  # Single line implicit string concat (conflicts with formatter)
+    "TD002",   # Missing author in TODO
+    "TD003",   # Missing issue link in TODO
+    "FIX002",  # Line contains TODO
+]
+
+# Allow autofix for all enabled rules
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.per-file-ignores]
+# Test files can use assert, print, and have longer lines
+"tests/**/*.py" = [
+    "S101",    # assert
+    "T201",    # print
+    "PLR2004", # Magic values in tests
+    "PLR0913", # Many arguments in test fixtures
+]
+
+# Examples can use print statements
+"examples/**/*.py" = [
+    "T201",    # print
+    "T203",    # pprint
+    "INP001",  # implicit namespace package
+]
+
+# CLI modules can use print and have different import patterns
+"pawnstack/cli/*.py" = [
+    "T201",    # print (needed for CLI output)
+    "T203",    # pprint
+]
+
+# Legacy code has different standards
+"legacy/**/*.py" = [
+    "ALL",     # Ignore all rules for legacy code
+]
+
+# __init__.py files have different import patterns
+"**/__init__.py" = [
+    "F401",    # unused imports
+    "F403",    # star imports
+    "E402",    # imports not at top
+]
+
+[tool.ruff.lint.isort]
+# Import sorting configuration
+known-first-party = ["pawnstack", "pawnlib"]
+known-third-party = [
+    "rich",
+    "httpx",
+    "requests",
+    "asyncio",
+    "pydantic",
+    "pytest",
+]
+combine-as-imports = true
+force-single-line = false
+split-on-trailing-comma = true
+
+[tool.ruff.lint.mccabe]
+# Maximum cyclomatic complexity
+max-complexity = 15
+
+[tool.ruff.lint.pep8-naming]
+# Naming conventions based on project standards
+classmethod-decorators = [
+    "classmethod",
+    "pydantic.validator",
+    "pydantic.field_validator",
+]
+staticmethod-decorators = [
+    "staticmethod",
+]
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 120
+ignore-overlong-task-comments = true
+
+[tool.ruff.lint.pydocstyle]
+# Docstring conventions
+convention = "google"
+ignore-decorators = ["typing.overload"]
+
+[tool.ruff.lint.pylint]
+# Pylint-compatible settings
+max-args = 8
+max-branches = 15
+max-returns = 6
+max-statements = 50
+
+[tool.ruff.lint.pyupgrade]
+# Keep compatible with Python 3.8+
+keep-runtime-typing = true
+
+[tool.ruff.format]
+# Formatting options aligned with project standards
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = 80
+
+# Preserve docstring formatting for Korean/English bilingual docs
+[tool.ruff.lint.pydocstyle]
+ignore-decorators = ["typing.overload"]
+
+[tool.ruff.lint.flake8-annotations]
+# Type annotation settings
+allow-star-arg-any = true
+suppress-dummy-args = true
+suppress-none-returning = true
+
+[tool.ruff.lint.flake8-bandit]
+# Security check settings
+check-typed-exception = true
+
+[tool.ruff.lint.flake8-builtins]
+# Avoid shadowing Python builtins
+builtins-ignorelist = ["id", "format", "type", "filter", "input"]
+
+[tool.ruff.lint.flake8-comprehensions]
+# Comprehension improvements
+allow-dict-calls-with-keyword-arguments = false
+
+[tool.ruff.lint.flake8-pytest-style]
+# Pytest style preferences
+fixture-parentheses = false
+mark-parentheses = false
+parametrize-names-type = "csv"
+parametrize-values-type = "list"
+
+[tool.ruff.lint.flake8-quotes]
+# Quote style (matches formatter)
+inline-quotes = "double"
+multiline-quotes = "double"
+docstring-quotes = "double"
+
+[tool.ruff.lint.flake8-type-checking]
+# Type checking imports
+runtime-evaluated-base-classes = [
+    "pydantic.BaseModel",
+    "sqlalchemy.orm.DeclarativeBase",
+]
+runtime-evaluated-decorators = [
+    "attrs.define",
+    "attrs.frozen",
+    "dataclass",
+]
+
+[tool.ruff.lint.flake8-unused-arguments]
+# Unused arguments handling
+ignore-variadic-names = true
