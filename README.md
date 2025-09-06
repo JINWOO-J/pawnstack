@@ -1,42 +1,42 @@
-# ♟️ Pawnlib
+# ♟️ PawnStack
 
-A versatile Python library for Infrastructure as Code (IaC). Monitor SSH logs, manage WebSocket connections, and automate tasks with ease.
+A modern Python library for Infrastructure as Code (IaC). Monitor SSH logs, manage WebSocket connections, and automate tasks with ease.
 
 A collection of libraries that can be used like pawns on a chessboard.
-Pawnlib is a collection of libraries for IaC.
+PawnStack is a collection of libraries for IaC.
 
 It provides a collection of utility functions and classes that aim to enhance productivity and streamline code development. The library is particularly useful for developers looking to reduce repetitive coding patterns and improve code readability.
 
 utils, globals vars, logging, http, network, pretty printing, resource, converter ...
 
 
-[![Build Docker Images](https://github.com/JINWOO-J/pawnlib/actions/workflows/docker-push.yml/badge.svg)](https://github.com/JINWOO-J/pawnlib/actions/workflows/docker-push.yml)
-[![Docs](https://github.com/JINWOO-J/pawnlib/actions/workflows/docs-publish.yml/badge.svg)](https://github.com/JINWOO-J/pawnlib/actions/workflows/docs-publish.yml)
-[![pages-build-deployment](https://github.com/JINWOO-J/pawnlib/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/JINWOO-J/pawnlib/actions/workflows/pages/pages-build-deployment)
+[![Build Docker Images](https://github.com/JINWOO-J/pawnstack/actions/workflows/docker-push.yml/badge.svg)](https://github.com/JINWOO-J/pawnstack/actions/workflows/docker-push.yml)
+[![Docs](https://github.com/JINWOO-J/pawnstack/actions/workflows/docs-publish.yml/badge.svg)](https://github.com/JINWOO-J/pawnstack/actions/workflows/docs-publish.yml)
+[![pages-build-deployment](https://github.com/JINWOO-J/pawnstack/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/JINWOO-J/pawnstack/actions/workflows/pages/pages-build-deployment)
 
-[![PyPI version](https://badge.fury.io/py/pawnlib.svg)](https://badge.fury.io/py/pawnlib)
+[![PyPI version](https://badge.fury.io/py/pawnstack.svg)](https://badge.fury.io/py/pawnstack)
 
 <p align="center">
-	<img src="https://img.shields.io/github/last-commit/JINWOO-J/pawnlib?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
-	<img src="https://img.shields.io/github/languages/top/JINWOO-J/pawnlib?style=default&color=0080ff" alt="repo-top-language">
-	<img src="https://img.shields.io/github/languages/count/JINWOO-J/pawnlib?style=default&color=0080ff" alt="repo-language-count">
+	<img src="https://img.shields.io/github/last-commit/JINWOO-J/pawnstack?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
+	<img src="https://img.shields.io/github/languages/top/JINWOO-J/pawnstack?style=default&color=0080ff" alt="repo-top-language">
+	<img src="https://img.shields.io/github/languages/count/JINWOO-J/pawnstack?style=default&color=0080ff" alt="repo-language-count">
 <p>
 
 
-### Installing pawnlib
-- **Installing pawnlib**
+### Installing pawnstack
+- **Installing pawnstack**
 
-pawnlib is available on PyPI:
-
-```
-pip3 install pawnlib
+pawnstack is available on PyPI:
 
 ```
-
-pawnlib with wallet is available on PyPI:
+pip3 install pawnstack
 
 ```
-pip3 install pawnlib[wallet]
+
+pawnstack with all optional features:
+
+```
+pip3 install pawnstack[full]
 
 ```
 
@@ -48,8 +48,8 @@ pip3 install pawnlib[wallet]
 You can use the global config. 
 
 ```python
-from pawnlib.config.globalconfig import pawnlib_config as pawn
-from pawnlib.output import *
+from pawnstack.config.globalconfig import pawnlib_config as pawn
+from pawnstack.output import *
 
 
 def main():
@@ -84,8 +84,7 @@ def main():
 ```
 ### pawns
 
-`pawns` CLI supports the following commands: icon, server, proxy, net, top, docker, aws, rpc, http, gs, init, info, banner, websocket, wallet.
-
+`pawns` CLI supports the following commands: 
 
 ```
 $ pawns 
@@ -136,7 +135,7 @@ sub-module:
 ### app builder 
 - **app builder** 
 
-You can create a simple application based on pawnlib with the command below.
+You can create a simple application based on pawnstack with the command below.
 
 
 ```bash
@@ -359,22 +358,22 @@ Officially supports Python 3.9+.
 
 ### Documentation
 
-Documentation and tutorials are available at https://pawnlib.readthedocs.io
+Documentation and tutorials are available at https://pawnstack.readthedocs.io
 
-### Using `run_pawnlib.sh`
+### Using `run_pawnstack.sh`
 
-This script is designed to run a Docker container for the Pawnlib project. Below are the options and usage instructions.
+This script is designed to run a Docker container for the PawnStack project. Below are the options and usage instructions.
 
 #### Usage
 
 ```bash
-./run_pawnlib.sh [options]
+./run_pawnstack.sh [options]
 ```
 
 #### Options
 
 - `-d` : Run the container in background mode (detached).
-- `-l` : Enable logging to a file located at `/tmp/pawnlib_docker.log`.
+- `-l` : Enable logging to a file located at `/tmp/pawnstack_docker.log`.
 - `-h` : Show this help message.
 
 #### Description
@@ -393,44 +392,44 @@ This script is designed to run a Docker container for the Pawnlib project. Below
 
 - To run the container interactively:
   ```bash
-  ./run_pawnlib.sh
+  ./run_pawnstack.sh
   ```
 
 - To run the container in detached mode:
   ```bash
-  ./run_pawnlib.sh -d
+  ./run_pawnstack.sh -d
   ```
 
 - To enable logging to a file:
   ```bash
-  ./run_pawnlib.sh -l
+  ./run_pawnstack.sh -l
   ```
 
 - To display the help message:
   ```bash
-  ./run_pawnlib.sh -h
+  ./run_pawnstack.sh -h
   ```
 
-#### Using `run_pawnlib.sh` with `curl`
+#### Using `run_pawnstack.sh` with `curl`
 
-You can download and execute the `run_pawnlib.sh` script directly using `curl`. Below are the instructions for doing so.
+You can download and execute the `run_pawnstack.sh` script directly using `curl`. Below are the instructions for doing so.
 
 1. **Download the Script**: Use `curl` to download the script from the repository. 
 
    ```bash
-   curl -O https://raw.githubusercontent.com/JINWOO-J/pawnlib/master/run_pawnlib.sh
+   curl -O https://raw.githubusercontent.com/JINWOO-J/pawnstack/master/run_pawnstack.sh
    ```
 
 2. **Make the Script Executable**: After downloading, you need to make the script executable.
 
    ```bash
-   chmod +x run_pawnlib.sh
+   chmod +x run_pawnstack.sh
    ```
 
 3. **Run the Script**: Now you can run the script with the desired options.
 
    ```bash
-   ./run_pawnlib.sh [options]
+   ./run_pawnstack.sh [options]
    ```
 
 #### Running the Script Directly with `curl`
@@ -438,7 +437,7 @@ You can download and execute the `run_pawnlib.sh` script directly using `curl`. 
 You can also execute the script directly without downloading it by using the following command:
 
 ```bash
-curl -sL https://raw.githubusercontent.com/JINWOO-J/pawnlib/master/run_pawnlib.sh | bash
+curl -sL https://raw.githubusercontent.com/JINWOO-J/pawnstack/master/run_pawnstack.sh | bash
 ```
 
 This command downloads the script and pipes it directly to `bash`, executing it immediately.
@@ -447,22 +446,22 @@ This command downloads the script and pipes it directly to `bash`, executing it 
 
 - To run the container interactively:
   ```bash
-  ./run_pawnlib.sh
+  ./run_pawnstack.sh
   ```
 
 - To run the container in detached mode:
   ```bash
-  ./run_pawnlib.sh -d
+  ./run_pawnstack.sh -d
   ```
 
 - To enable logging to a file:
   ```bash
-  ./run_pawnlib.sh -l
+  ./run_pawnstack.sh -l
   ```
 
 - To display the help message:
   ```bash
-  ./run_pawnlib.sh -h
+  ./run_pawnstack.sh -h
   ```
 
 Make sure to have Docker installed and running before executing the script.

@@ -1,44 +1,19 @@
-"""믹스인 클래스들"""
-
+# pawnstack/mixins.py
 from __future__ import annotations
-
 import logging
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from pawnstack.logging.logger import Logger
-
+from pawnstack.log import get_logger, Log
 
 class LoggerMixin:
-    """로깅 기능을 제공하는 믹스인 클래스"""
-    
+    """표준 logger와 프록시 둘 다 제공"""
     def __init__(self) -> None:
-        self._logger_instance: logging.Logger | None = None
-    
+        name = f"{self.__class__.__module__}.{self.__class__.__name__}"
+        self._logger: logging.Logger | None = get_logger(name)
+        self._log: Log | None = Log(name)
+
     @property
     def logger(self) -> logging.Logger:
-        """로거 인스턴스 반환"""
-        if self._logger_instance is None:
-            self._logger_instance = logging.getLogger(
-                f"{self.__class__.__module__}.{self.__class__.__name__}"
-            )
-        return self._logger_instance
+        return self._logger  # 표준 logging.Logger
 
-
-class ConfigMixin:
-    """설정 관리 기능을 제공하는 믹스인 클래스"""
-    
-    def __init__(self, config: dict | None = None) -> None:
-        self._config = config or {}
-    
-    def get_config(self, key: str, default: any = None) -> any:
-        """설정 값 조회"""
-        return self._config.get(key, default)
-    
-    def set_config(self, key: str, value: any) -> None:
-        """설정 값 설정"""
-        self._config[key] = value
-    
-    def update_config(self, config: dict) -> None:
-        """설정 업데이트"""
-        self._config.update(config)
+    @property
+    def log(self) -> Log:
+        return self._log     # .console/.info/... 지원

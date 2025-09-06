@@ -574,11 +574,11 @@ class TopCLI(AsyncBaseCLI):
         """프로세스 테이블 생성"""
         table = Table(show_header=True, header_style="bold bright_cyan", box=box.SIMPLE)
         table.add_column("PID", style="cyan", width=8)
-        
+
         # show_cmdline 옵션에 따라 컬럼 너비 조정
         name_width = 45 if self.config and self.config.show_cmdline else 40
         table.add_column("Name", style="white", width=name_width)
-        
+
         table.add_column("CPU%", style="yellow", width=8)
         table.add_column("MEM%", style="magenta", width=8)
         table.add_column("RSS", style="blue", width=10)  # 실제 메모리 사용량
@@ -590,7 +590,7 @@ class TopCLI(AsyncBaseCLI):
         info_fields = ['pid', 'name', 'cpu_percent', 'memory_percent', 'status', 'memory_info', 'cpu_times']
         if self.config and self.config.show_cmdline:
             info_fields.append('cmdline')
-            
+
         for proc in psutil.process_iter(info_fields):
             try:
                 pinfo = proc.info
@@ -618,7 +618,7 @@ class TopCLI(AsyncBaseCLI):
             mem_val = proc.get('memory_percent') or 0
             cpu_color = self.get_color_by_percent(cpu_val * 10)
             mem_color = self.get_color_by_percent(mem_val * 10)
-            
+
             # 프로세스 이름 또는 명령줄 표시
             if self.config and self.config.show_cmdline:
                 cmdline = proc.get('cmdline', [])
@@ -631,7 +631,7 @@ class TopCLI(AsyncBaseCLI):
             else:
                 display_name = proc.get('name', '')
                 name_width = 40
-            
+
             # 메모리 정보 (RSS - Resident Set Size)
             memory_info = proc.get('memory_info')
             if memory_info:
@@ -639,7 +639,7 @@ class TopCLI(AsyncBaseCLI):
                 rss_str = f"{rss_mb:.1f}M"
             else:
                 rss_str = "N/A"
-            
+
             # CPU 시간
             cpu_times = proc.get('cpu_times')
             if cpu_times:
@@ -1216,11 +1216,11 @@ class TopCLI(AsyncBaseCLI):
 
                     processes = []
                     # cmdline 옵션 지원을 위해 info_fields 설정
-                    info_fields = ['pid', 'name', 'cpu_percent', 'memory_percent', 
+                    info_fields = ['pid', 'name', 'cpu_percent', 'memory_percent',
                                  'num_threads', 'status', 'username', 'memory_info', 'cpu_times']
                     if self.config and self.config.show_cmdline:
                         info_fields.append('cmdline')
-                        
+
                     for proc in psutil.process_iter(info_fields):
                         try:
                             pinfo = proc.info
@@ -1249,7 +1249,7 @@ class TopCLI(AsyncBaseCLI):
                         mem_val = proc.get('memory_percent') or 0
                         cpu_color = self.get_color_by_percent(cpu_val * 10)
                         mem_color = self.get_color_by_percent(mem_val * 10)
-                        
+
                         # 프로세스 이름 또는 명령줄 표시
                         if self.config and self.config.show_cmdline:
                             cmdline = proc.get('cmdline', [])
@@ -1259,7 +1259,7 @@ class TopCLI(AsyncBaseCLI):
                                 display_name = proc.get('name', '')
                         else:
                             display_name = proc.get('name', '')
-                        
+
                         # 메모리 정보 (RSS)
                         memory_info = proc.get('memory_info')
                         if memory_info:
@@ -1267,7 +1267,7 @@ class TopCLI(AsyncBaseCLI):
                             rss_str = f"{rss_mb:.1f}M"
                         else:
                             rss_str = "N/A"
-                        
+
                         # CPU 시간
                         cpu_times = proc.get('cpu_times')
                         if cpu_times:

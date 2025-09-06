@@ -1,16 +1,25 @@
 """PawnStack 기본 사용 예제"""
 
 import asyncio
+import logging
+import os
+# 환경 변수를 설정하여 전역 설정의 로그 출력 비활성화
+os.environ['PAWN_CONSOLE'] = '{"redirect": false}'
+
 from pawnstack import PawnStack, Config
 
 
 async def main():
     """기본 사용 예제"""
     
+    # 외부 라이브러리의 로그 레벨을 WARNING으로 올려 DEBUG/INFO 메시지 숨기기
+    logging.getLogger("httpcore").setLevel(logging.WARNING)
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    
     # 설정 생성
     config = Config(
         app_name="example_app",
-        debug=True,
+        debug=False,
     )
     
     # HTTP 설정 조정
@@ -18,8 +27,9 @@ async def main():
     config.http.max_retries = 2
     
     # 로깅 설정 조정
-    config.logging.level = "DEBUG"
+    config.logging.level = "INFO"
     config.logging.enable_rich = True
+    config.logging.enable_console = True
     
     # PawnStack 인스턴스 생성 및 사용
     async with PawnStack(config) as pstack:
@@ -48,4 +58,10 @@ async def main():
 
 
 if __name__ == "__main__":
+    # 루트 로거 설정
+    logging.basicConfig(
+        format="%(message)s",
+        level=logging.WARNING  # 전역 로거 레벨을 WARNING으로 설정하여 INFO 메시지 숨기기
+    )
+    
     asyncio.run(main())

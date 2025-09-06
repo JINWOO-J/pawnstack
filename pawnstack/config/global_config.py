@@ -434,6 +434,7 @@ class PawnStackConfig(metaclass=Singleton):
         elif self.log_time_format:
             return dt.strftime(self.log_time_format)
         else:
+            # 일관된 시간 포맷 사용 (밀리초 포함)
             return f"[{dt.strftime('%H:%M:%S,%f')[:-3]}]"
 
     def _init_console(self, force_init: bool = True):
@@ -444,7 +445,7 @@ class PawnStackConfig(metaclass=Singleton):
             'record': True,
             'soft_wrap': False,
             'force_terminal': True,
-            'log_time_format': lambda dt: f"[{dt.strftime('%H:%M:%S,%f')[:-3]}]"
+            'log_time_format': lambda dt: f"[{dt.strftime('%H:%M:%S,%f')[:-3]}]"  # 일관된 시간 포맷 사용 (밀리초 포함)
         }
         
         if not self._loaded.get('console'):

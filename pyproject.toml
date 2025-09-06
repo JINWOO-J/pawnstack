@@ -1,117 +1,124 @@
 [build-system]
-requires = ["hatchling", "hatch-fancy-pypi-readme", "toml"]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pawnlib"
-description = "pawnlib: A versatile Python library for Infrastructure as Code (IaC), offering tools for SSH monitoring, WebSocket connections, and more."
+name = "pawnstack"
+description = "pawnstack: A modern Python library for Infrastructure as Code (IaC), offering tools for system monitoring, HTTP utilities, and more."
 license = { text = "MIT License" }
-keywords = ["Python IaC", "SSH monitoring Python", "pawnlib tools"]
-requires-python = ">=3.7"
+keywords = ["Python IaC", "Infrastructure as Code", "system monitoring", "pawnstack tools"]
+requires-python = ">=3.9"
 authors = [
     { name = "Jinwoo", email = "jinwoo@parametacorp.com" },
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
-    "Environment :: Plugins",
+    "Environment :: Console",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: System :: Monitoring",
+    "Topic :: System :: Systems Administration",
 ]
 dependencies = [
-    "asttokens>=2.0.5",
-    "certifi>=2020.12.15",
-    "charset-normalizer>=2.1.0",
-    "devtools>=0.8.0",
-    "executing>=0.8.3",
-    "idna>=2.5",
-    "parameterized>=0.8.1",
-    "PyYAML>=5.3.1",
-    "urllib3~=1.26.0",
-#    "requests~=2.29.0",
-    "requests>=2.25.0",
-    "six>=1.15.0",
-    "termcolor>=1.1.0",
-    "asyncio>=3.4.3",
-    "aiometer>=0.3.0",
-    "pyfiglet>=0.8.post1",
-    "deprecated~=1.2.13",
-    "argparse>=1.4.0",
-    "Jinja2>=3.0.3",
-    "rich>=12.0.1",
-    "Pygments>=2.14.0",
-    "inquirerpy==0.3.4",
-    "httpx~=0.24.0",
-    "websocket-client>=0.59.0",
-    "tabulate>=0.8.7",
+    "certifi>=2023.7.22",
+    "charset-normalizer>=3.3.0",
+    "idna>=3.4",
+    "requests>=2.31.0",
+    "urllib3>=2.0.0",
+    "PyYAML>=6.0.1",
+    "parameterized>=0.9.0",
+    "rich>=13.0.0,<15.0.0",
+    "typer>=0.9.0,<1.0.0",
+    "pydantic>=2.0.0,<3.0.0",
+    "httpx>=0.25.0,<1.0.0",
+    "websocket-client>=1.6.0",
+    "tabulate>=0.9.0",
     "aiohttp>=3.8.6",
-    "aiofiles>=22.1.0",
-    "python-dotenv~=0.21.1",
-    "tqdm~=4.65.0",
-    "psutil~=5.9.8",
-    "dnspython~=2.7.0",
+    "aiofiles>=23.0.0",
+    "python-dotenv>=1.0.0",
+    "tqdm>=4.66.0",
+    "psutil>=5.9.0",
+    "dnspython>=2.4.0",
+    "Jinja2>=3.1.0",
+    "pyfiglet>=1.0.0",
+    "aiometer>=0.3.0",
 ]
 dynamic = ["readme", "version"]
 
 [project.optional-dependencies]
-brotli = [
-    "brotli; platform_python_implementation == 'CPython'",
-    "brotlicffi; platform_python_implementation != 'CPython'",
+blockchain = [
+    "eth-keyfile>=0.7.0,<1.0.0",
+    "coincurve>=18.0.0,<19.0.0",
+    "secp256k1>=0.14.0,<1.0.0",
 ]
 
-
-wallet = [
-    "eth_keyfile>=0.6.1",
-    "coincurve~=18.0.0",
-    "rich>=10,<14",
+cloud = [
+    "boto3>=1.34.0,<2.0.0",
+    "aioboto3>=11.0.0,<12.0.0",
 ]
 
 docker = [
-    "aiodocker~=0.21.0",
+    "aiodocker>=0.21.0,<1.0.0",
+]
+
+redis = [
+    "redis>=5.0.0,<6.0.0",
+    "aioredis>=2.0.0,<3.0.0",
+]
+
+database = [
+    "sqlalchemy>=2.0.0,<3.0.0",
+    "asyncpg>=0.29.0,<1.0.0",
+    "aiomysql>=0.2.0,<1.0.0",
+]
+
+messaging = [
+    "slack-sdk>=3.27.0,<4.0.0",
+    "discord.py>=2.3.0,<3.0.0",
+]
+
+monitoring = [
+    "prometheus-client>=0.19.0,<1.0.0",
+    "grafana-api>=1.0.0,<2.0.0",
+]
+
+performance = [
+    "uvloop>=0.19.0,<1.0.0; sys_platform != 'win32'",
+    "orjson>=3.9.0,<4.0.0",
+    "msgpack>=1.0.0,<2.0.0",
 ]
 
 full = [
-    "eth_keyfile>=0.6.1",
-    "coincurve~=18.0.0",
-    "rich>=10,<14",
-    "aiodocker~=0.21.0",
-    "boto3>=1.28.3",
-    "redis~=4.5.1",
-    "aioboto3~=11.3.1",
-    "xxhash~=3.5.0",
+    "pawnstack[blockchain,cloud,docker,redis,database,messaging,monitoring,performance]",
 ]
 
 [project.scripts]
-pawns = "pawnlib.cli.main_cli:main"
+pawns = "pawnstack.cli.main:main"
 
 [project.urls]
-Changelog = "https://github.com/jinwoo-j/pawnlib"
-Documentation = "https://pawnlib.readthedocs.io"
-Homepage = "https://pawnlib.readthedocs.io"
-Source = "https://github.com/jinwoo-j/pawnlib"
+Changelog = "https://github.com/JINWOO-J/pawnstack/blob/main/CHANGELOG.md"
+Documentation = "https://pawnstack.readthedocs.io"
+Homepage = "https://pawnstack.readthedocs.io"
+Source = "https://github.com/JINWOO-J/pawnstack"
 
 [tool.hatch.version]
-path = "pawnlib/__version__.py"
+path = "pawnstack/__version__.py"
 
 [tool.hatch.build.targets.sdist]
 include = [
-    "/pawnlib",
+    "/pawnstack",
     "/README.md",
+    "/CHANGELOG.md",
 ]
-
-#
-#[tool.hatch.metadata.hooks.custom]
-#module = "hatch_build:CustomDepsHook"
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
 content-type = "text/markdown"
@@ -120,7 +127,11 @@ content-type = "text/markdown"
 path = "README.md"
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-text = "\n## Release Information\n\n"
+text = """
+
+## Release Information
+
+"""
 
 [tool.ruff]
 select = ["E", "F", "I", "B", "PIE"]
@@ -140,21 +151,20 @@ disallow_untyped_defs = false
 check_untyped_defs = true
 
 [tool.pytest.ini_options]
-addopts = "-rxXs"
+addopts = "-rxXs --strict-markers"
 filterwarnings = [
     "error",
 ]
 markers = [
-    "copied_from(source, changes=None): mark test as copied from somewhere else, along with a description of changes made to accodomate e.g. our test setup",
+    "copied_from(source, changes=None): mark test as copied from somewhere else, along with a description of changes made to accommodate our test setup",
     "network: marks tests which require network connection. Used in 3rd-party build environments that have network disabled."
 ]
 
-
 [tool.coverage.run]
-omit = ["venv/*", "pawnlib/_compat.py"]
-include = ["pawnlib/*", "tests/*"]
+omit = ["venv/*"]
+include = ["pawnstack/*", "tests/*"]
 
 [tool.pyright]
-include = ["pawnlib", "tests"]
+include = ["pawnstack", "tests"]
 pythonPath = "."
 reportMissingImports = false
