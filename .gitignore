@@ -167,4 +167,7 @@ dmypy.json
 cython_debug/
 BUILD_ARGS
 DEBUG_ARGS
-.kiro
+.kiro/
+.rules
+.zed/
+QWEN.md
