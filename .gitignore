@@ -167,3 +167,4 @@ dmypy.json
 cython_debug/
 BUILD_ARGS
 DEBUG_ARGS
+.kiro
