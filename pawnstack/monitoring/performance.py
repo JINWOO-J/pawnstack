@@ -19,7 +19,7 @@ from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TimeEl
 from rich.panel import Panel
 from rich.text import Text
 
-from pawnstack.http.client import HTTPClient
+from pawnstack.http.client import HttpClient
 
 
 @dataclass
@@ -64,7 +64,7 @@ class PerformanceMonitor:
 
     def __init__(self, console: Optional[Console] = None):
         self.console = console or Console()
-        self.client = HTTPClient()
+        self.client = HttpClient()
         self.metrics_history: deque = deque(maxlen=10000)
         self.benchmark_results: List[BenchmarkResult] = []
         self.baseline_metrics: Optional[Dict[str, float]] = None

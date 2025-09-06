@@ -15,7 +15,7 @@ from pawnstack import __version__
 from pawnstack.config.global_config import pawn
 from pawnstack.cli.base import AsyncBaseCLI
 from pawnstack.cli.banner import generate_banner
-from pawnstack.http.client import HTTPClient
+from pawnstack.http.client import HttpClient
 
 # 모듈 메타데이터
 __description__ = 'ICON blockchain network interaction and monitoring tool'
@@ -45,7 +45,7 @@ class IconCLI(AsyncBaseCLI):
     
     def __init__(self, args=None):
         super().__init__(args)
-        self.http_client = HTTPClient()
+        self.http_client = HttpClient()
         self.request_count = 0
         self.error_count = 0
         self.response_times = []

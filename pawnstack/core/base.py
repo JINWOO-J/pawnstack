@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Any, Optional
 
 from pawnstack.config.settings import Config
 from pawnstack.core.mixins import LoggerMixin
-from pawnstack.http.client import HTTPClient
+from pawnstack.http.client import HttpClient
 # ⬇️ 기존 Logger 제거
 # from pawnstack.logging.logger import Logger
 from pawnstack.log import setup as log_setup, get_logger, get_console  # 새 파사드
@@ -50,7 +50,7 @@ class PawnStack(LoggerMixin):
         super().__init__()
 
         # 핵심 컴포넌트
-        self._http: Optional[HTTPClient] = None
+        self._http: Optional[HttpClient] = None
         self._system_monitor: Optional[SystemMonitor] = None
 
         # 사용: 믹스인이 제공하는 self.logger (표준 logging.Logger)
@@ -62,10 +62,10 @@ class PawnStack(LoggerMixin):
         #     c.rule("[bold green]PawnStack Started[/]")
 
     @property
-    def http(self) -> HTTPClient:
+    def http(self) -> HttpClient:
         """HTTP 클라이언트 인스턴스"""
         if self._http is None:
-            self._http = HTTPClient()
+            self._http = HttpClient()
         return self._http
 
     @property

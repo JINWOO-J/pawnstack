@@ -1338,6 +1338,11 @@ def shorten_text(text: str, max_length: int) -> str:
     return text[:max_length-3] + "..."
 
 
+def get_arguments(parser: ArgumentParser):
+    cli = TopCLI()
+    cli.get_arguments(parser)
+
+
 def main():
     """CLI 진입점"""
     cli = TopCLI()

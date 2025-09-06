@@ -14,7 +14,7 @@ from pawnstack import __version__
 from pawnstack.config.global_config import pawn
 from pawnstack.cli.base import AsyncBaseCLI
 from pawnstack.cli.banner import generate_banner
-from pawnstack.http.client import HTTPClient
+from pawnstack.http.client import HttpClient
 
 # 모듈 메타데이터
 __description__ = 'JSON-RPC client and testing tool'
@@ -45,7 +45,7 @@ class RPCCLI(AsyncBaseCLI):
     
     def __init__(self, args=None):
         super().__init__(args)
-        self.http_client = HTTPClient()
+        self.http_client = HttpClient()
     
     def get_arguments(self, parser: ArgumentParser):
         """인수 정의"""

@@ -1,6 +1,6 @@
 
 --build-arg BASE_IMAGE=python:3.10.16-slim-bookworm  
---build-arg BUILD_DATE=2025-09-06T15:14:37UTC  
+--build-arg BUILD_DATE=2025-09-06T15:33:46UTC  
 --build-arg DOCKER_BUILD_OPTION=--no-cache --rm=true  
 --build-arg ECHO_OPTION=  
 --build-arg GIT_USER=JINWOO-J  

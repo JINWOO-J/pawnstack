@@ -21,7 +21,7 @@ from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TimeEl
 from rich.layout import Layout
 from rich.text import Text
 
-from pawnstack.http.client import HTTPClient, HTTPResponse
+from pawnstack.http.client import HttpClient, HttpResponse
 from pawnstack.typing.validators import is_valid_url
 
 
@@ -78,7 +78,7 @@ class HTTPMonitor:
         self.statistics: Dict[str, Dict[str, Any]] = {}
         self.response_time_history: Dict[str, deque] = {}  # sparkline용 히스토리
         self.status_history: Dict[str, deque] = {}  # 상태 히스토리
-        self.client = HTTPClient()
+        self.client = HttpClient()
         self.is_running = False
         self._tasks: List[asyncio.Task] = []
         # 터미널 너비 감지
@@ -170,7 +170,7 @@ class HTTPMonitor:
 
     def _check_success_criteria(
         self,
-        response: HTTPResponse,
+        response: HttpResponse,
         response_time: float,
         criteria: List[str],
         operator: str = "and"

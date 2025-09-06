@@ -10,7 +10,7 @@ from typing import Dict, Any, Optional, Union
 
 
 @dataclass
-class HTTPResponse:
+class HttpResponse:
     """HTTP 응답 데이터 클래스"""
     status_code: int
     headers: Dict[str, str]
@@ -28,7 +28,7 @@ class HTTPResponse:
         return 200 <= self.status_code < 300
 
 
-class HTTPClient:
+class HttpClient:
     """비동기 HTTP 클라이언트"""
     
     def __init__(
@@ -51,7 +51,7 @@ class HTTPClient:
         timeout: Optional[float] = None,
         verify_ssl: Optional[bool] = None,
         **kwargs
-    ) -> HTTPResponse:
+    ) -> HttpResponse:
         """HTTP 요청 실행"""
         # 헤더 병합
         request_headers = self.default_headers.copy()
@@ -79,7 +79,7 @@ class HTTPClient:
             
             response = await client.request(method, url, **request_kwargs)
             
-            return HTTPResponse(
+            return HttpResponse(
                 status_code=response.status_code,
                 headers=dict(response.headers),
                 content=response.content,
@@ -87,30 +87,30 @@ class HTTPClient:
                 url=str(response.url)
             )
     
-    async def get(self, url: str, **kwargs) -> HTTPResponse:
+    async def get(self, url: str, **kwargs) -> HttpResponse:
         """GET 요청"""
         return await self.request('GET', url, **kwargs)
     
-    async def post(self, url: str, **kwargs) -> HTTPResponse:
+    async def post(self, url: str, **kwargs) -> HttpResponse:
         """POST 요청"""
         return await self.request('POST', url, **kwargs)
     
-    async def put(self, url: str, **kwargs) -> HTTPResponse:
+    async def put(self, url: str, **kwargs) -> HttpResponse:
         """PUT 요청"""
         return await self.request('PUT', url, **kwargs)
     
-    async def delete(self, url: str, **kwargs) -> HTTPResponse:
+    async def delete(self, url: str, **kwargs) -> HttpResponse:
         """DELETE 요청"""
         return await self.request('DELETE', url, **kwargs)
     
-    async def patch(self, url: str, **kwargs) -> HTTPResponse:
+    async def patch(self, url: str, **kwargs) -> HttpResponse:
         """PATCH 요청"""
         return await self.request('PATCH', url, **kwargs)
     
-    async def head(self, url: str, **kwargs) -> HTTPResponse:
+    async def head(self, url: str, **kwargs) -> HttpResponse:
         """HEAD 요청"""
         return await self.request('HEAD', url, **kwargs)
     
-    async def options(self, url: str, **kwargs) -> HTTPResponse:
+    async def options(self, url: str, **kwargs) -> HttpResponse:
         """OPTIONS 요청"""
         return await self.request('OPTIONS', url, **kwargs)

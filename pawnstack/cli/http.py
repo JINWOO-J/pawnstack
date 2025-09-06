@@ -19,7 +19,7 @@ from pawnstack.cli.base import HTTPBaseCLI
 from pawnstack.cli.banner import generate_banner
 from pawnstack.utils.file import write_json, read_file
 from pawnstack.typing.validators import is_valid_url, is_json
-from pawnstack.http.client import HTTPClient
+from pawnstack.http.client import HttpClient
 from pawnstack.monitoring import HTTPMonitor, HTTPMonitorConfig, quick_benchmark
 
 # 모듈 메타데이터
@@ -623,8 +623,8 @@ class HTTPCLI(HTTPBaseCLI):
         self.sequence += 1  # 시퀀스 증가
 
         try:
-            from pawnstack.http.client import HTTPClient
-            client = HTTPClient()
+            from pawnstack.http.client import HttpClient
+            client = HttpClient()
 
             # HTTP 요청 실행
             response = await client.request(

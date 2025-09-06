@@ -3,6 +3,7 @@
 """
 
 import unittest
+import os
 from unittest.mock import patch, MagicMock
 from argparse import Namespace, ArgumentParser
 
@@ -151,10 +152,16 @@ class TestCloudBaseCLI(unittest.TestCase):
             session_token=None,
             endpoint_url=None
         )
-        self.cli = MockCloudCLI(self.args)
 
-    def test_get_aws_config(self):
+    @patch('os.getenv')
+    def test_get_aws_config(self, mock_getenv):
         """AWS 설정 반환 테스트"""
+        mock_getenv.side_effect = lambda key, default=None: {
+            "AWS_ACCESS_KEY_ID": "FAKEACCESSKEY1234567890",
+            "AWS_SECRET_ACCESS_KEY": "fakeSecretKeyDontUseInProd1234567890"
+        }.get(key, default)
+
+        self.cli = MockCloudCLI(self.args)
         config = self.cli.get_aws_config()
 
         expected = {
@@ -167,6 +174,7 @@ class TestCloudBaseCLI(unittest.TestCase):
 
     def test_get_common_cloud_arguments(self):
         """클라우드 공통 인수 테스트"""
+        self.cli = MockCloudCLI(self.args)
         parser = ArgumentParser()
         self.cli.get_common_cloud_arguments(parser)
 
@@ -177,6 +185,7 @@ class TestCloudBaseCLI(unittest.TestCase):
 
     def test_aws_regions_list(self):
         """AWS 리전 목록 테스트"""
+        self.cli = MockCloudCLI(self.args)
         self.assertIn('ap-northeast-2', self.cli.aws_regions)
         self.assertIn('us-east-1', self.cli.aws_regions)
 

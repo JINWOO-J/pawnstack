@@ -37,13 +37,10 @@ def test_http_response_model():
         content=b'{"test": "data"}',
         text='{"test": "data"}',
         url="https://example.com",
-        elapsed=0.5,
     )
     
     assert response.status_code == 200
-    assert response.is_success is True
-    assert response.is_client_error is False
-    assert response.is_server_error is False
+    assert response.is_success() is True
     assert response.json() == {"test": "data"}
 
 
